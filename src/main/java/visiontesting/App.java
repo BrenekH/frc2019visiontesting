@@ -7,7 +7,7 @@ import org.opencv.core.Mat;
 
 public class App {
     public String getGreeting() {
-        return "Hello world.";
+        return "Hello world, lolz.";
     }
 
     public static void main(String[] args) {
