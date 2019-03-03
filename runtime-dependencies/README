@@ -1,0 +1,2 @@
+This directory contains everything required for running the program(images, .dll's, .so's, etc).
+You should make sure the contents of this file are copied to the same directory as the jar file.
