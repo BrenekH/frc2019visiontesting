@@ -3,7 +3,10 @@
  */
 package visiontesting;
 
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.highgui.HighGui;
+import org.opencv.videoio.VideoCapture;
 
 public class App {
     public String getGreeting() {
@@ -11,9 +14,21 @@ public class App {
     }
 
     public static void main(String[] args) {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         System.out.println(new App().getGreeting());
         for (String item : args) {
             System.out.println(item);
+        }
+        Imshow im = new Imshow("Video Preview");
+        im.Window.setResizable(true);
+        Mat frame = new Mat();
+        VideoCapture camera = new VideoCapture(0);
+        JFrame jframe = HighGui.createJFrame("Hello World", 0);
+        jframe.setVisible(true);
+        while (true) {
+            // System.out.println("Doing the things");
+            camera.read(frame);
+            im.showImage(frame);
         }
     }
 }
