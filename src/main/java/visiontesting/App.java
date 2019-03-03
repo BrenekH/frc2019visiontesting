@@ -24,11 +24,13 @@ public class App {
             frame = Imgcodecs.imread(args[0]);
         }
         Imshow im = new Imshow("Video Preview");
+        Detector detector = new Detector(true);
         im.Window.setResizable(true);
         while (true) {
             if (cameraActive) {
                 camera.read(frame);
             }
+            detector.detect2019Targets(frame);
             im.showImage(frame);
         }
     }
