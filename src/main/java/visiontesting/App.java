@@ -14,6 +14,8 @@ public class App {
     }
 
     public static void main(String[] args) {
+        // TODO: Make a proper command line parser
+        // * Parser needs to take image, draw-boolean, and camera id.
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         System.out.println(new App().getGreeting());
         boolean cameraActive = true;
@@ -24,13 +26,13 @@ public class App {
             frame = Imgcodecs.imread(args[0]);
         }
         Imshow im = new Imshow("Video Preview");
-        Detector detector = new Detector(true);
+        Detector detector = new Detector(false);
         im.Window.setResizable(true);
         while (true) {
             if (cameraActive) {
                 camera.read(frame);
             }
-            detector.detect2019Targets(frame);
+            System.out.println(detector.detect2019Targets(frame).size());
             im.showImage(frame);
         }
     }
