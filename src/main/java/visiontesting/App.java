@@ -9,6 +9,8 @@ import org.opencv.videoio.VideoCapture;
 import org.opencv.imgcodecs.Imgcodecs;
 
 public class App {
+    public static boolean cameraActive = true;
+
     public String getGreeting() {
         return "Hello world, lolz.";
     }
@@ -18,15 +20,14 @@ public class App {
         // * Parser needs to take image, draw-boolean, and camera id.
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         System.out.println(new App().getGreeting());
-        boolean cameraActive = true;
-        VideoCapture camera = new VideoCapture(0);
+        VideoCapture camera = new VideoCapture(1);
         Mat frame = new Mat();
         if (args.length != 0) {
             cameraActive = false;
             frame = Imgcodecs.imread(args[0]);
         }
         Imshow im = new Imshow("Video Preview");
-        Detector detector = new Detector(false);
+        Detector detector = new Detector(true);
         im.Window.setResizable(true);
         while (true) {
             if (cameraActive) {

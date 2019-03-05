@@ -41,16 +41,34 @@ public class Detector {
         double maxBrightness = 255;
       
         // Contour filter parameters
-        Range area = new Range(0.03, 100);
+        // Range area = new Range(0.03, 100);
+        // Range fullness = new Range(0, 100);
+        // Range aspectRatio = new Range(0.2, 4);
+        Range area = new Range(0, 100);
         Range fullness = new Range(0, 100);
-        Range aspectRatio = new Range(0.2, 4);
+        Range aspectRatio = new Range(0, 100);
       
         // Camera settings
-        Resolution resolution = new Resolution(720, 478);
-        CameraSettings cameraSettings = new CameraSettings(false, new FOV(50, 40), resolution);
-        TargetFilter targetFilter = new HSVFilter(new Range(50, 70), new Range(100, 255), new Range(100, 255));
-        ContourFilter contourFilter = new StandardContourFilter(new Range(0.03, 100), new Range(0, 100), new Range(0.2, 4), resolution.getArea());
-        
+        CameraSettings cameraSettings;
+        TargetFilter targetFilter;
+        ContourFilter contourFilter;
+        if (!App.cameraActive) {
+            Resolution resolution = new Resolution(720, 478);
+
+            cameraSettings = new CameraSettings(false, new FOV(50, 40), resolution);
+            targetFilter = new HSVFilter(new Range(50, 70), new Range(100, 255), new Range(100, 255));
+            contourFilter = new StandardContourFilter(new Range(0.03, 100), new Range(0, 100), new Range(0.2, 4), resolution.getArea());
+        } else {
+            FOV fov = new FOV(50, 40);
+            Resolution resolution = new Resolution(640, 480);
+            boolean cameraInverted = false;
+            int imageArea = resolution.getArea();
+
+            targetFilter = new HSVFilter(new Range(70, 180), new Range(80, 242), new Range(193, 255));
+            contourFilter = new StandardContourFilter(area, fullness, aspectRatio, imageArea);
+            cameraSettings = new CameraSettings(cameraInverted, fov, resolution);
+
+        }
         TargetFinder targetFinder = new TargetFinder(cameraSettings, targetFilter, contourFilter, TargetGrouping.SINGLE);
       
         // Find the targets

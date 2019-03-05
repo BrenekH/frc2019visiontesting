@@ -21,6 +21,7 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
     maven { url 'https://jitpack.io' }
+    mavenCentral()
     flatDir {
        dirs 'libs'
     }
@@ -32,6 +33,7 @@ dependencies {
 
     compile 'com.github.kylecorry31:Robot-Vision-API:v1.1.2'
     compile name: 'opencv-345'
+    compile "edu.wpi.first.ntcore:ntcore-java:2019.1.1" //.java
     // compile name: 'Imshow'
 
     // Use JUnit test framework
