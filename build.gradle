@@ -31,9 +31,16 @@ dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     implementation 'com.google.guava:guava:27.0.1-jre'
 
+    // Repositories compile
     compile 'com.github.kylecorry31:Robot-Vision-API:v1.1.2'
+    // compile "edu.wpi.first.ntcore:ntcore-java:2019.1.1" //.java
+
+    // Libs compile
     compile name: 'opencv-345'
-    compile "edu.wpi.first.ntcore:ntcore-java:2019.1.1" //.java
+    compile name: "ntcore"
+    compile name: "wpiHal"
+    compile name: "wpilibj"
+    compile name: "wpiutil"
     // compile name: 'Imshow'
 
     // Use JUnit test framework
