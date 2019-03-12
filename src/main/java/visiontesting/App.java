@@ -7,6 +7,7 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.imgcodecs.Imgcodecs;
+import edu.wpi.first.networktables.*;
 
 public class App {
     public static boolean cameraActive = true;
@@ -20,6 +21,9 @@ public class App {
         // * Parser needs to take image, draw-boolean, and camera id.
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         System.out.println(new App().getGreeting());
+        NetworkTableInstance ntinst = NetworkTableInstance.getDefault();
+        ntinst.startClient("localhost");
+        NetworkTable nt = ntinst.getTable("haywire-camera");//.getSubTable("haywire-camera");
         VideoCapture camera = new VideoCapture(1);
         Mat frame = new Mat();
         if (args.length != 0) {
