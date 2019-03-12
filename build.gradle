@@ -21,6 +21,7 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
     maven { url 'https://jitpack.io' }
+    maven { url 'http://first.wpi.edu/FRC/roborio/maven/release/' }
     mavenCentral()
     flatDir {
        dirs 'libs'
@@ -33,14 +34,14 @@ dependencies {
 
     // Repositories compile
     compile 'com.github.kylecorry31:Robot-Vision-API:v1.1.2'
-    // compile "edu.wpi.first.ntcore:ntcore-java:2019.1.1" //.java
+    compile "edu.wpi.first.ntcore:ntcore-java:2019.4.1" //.java
 
     // Libs compile
     compile name: 'opencv-345'
-    compile name: "ntcore"
-    compile name: "wpiHal"
-    compile name: "wpilibj"
-    compile name: "wpiutil"
+    // compile name: "ntcore"
+    // compile name: "wpiHal"
+    // compile name: "wpilibj"
+    // compile name: "wpiutil"
     // compile name: 'Imshow'
 
     // Use JUnit test framework
