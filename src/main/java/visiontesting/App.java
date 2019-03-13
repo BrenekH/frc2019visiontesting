@@ -8,27 +8,39 @@ import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.imgcodecs.Imgcodecs;
 import edu.wpi.first.networktables.*;
+import com.beust.jcommander.*;
 
 public class App {
+    // * Parser needs to take image, draw-boolean, and camera id.
+    @Parameter(names={"--image", "-i"}, description="The path to an image to process. Leave blank to use camera.")
+    static String imageUri = "";
+
     public static boolean cameraActive = true;
 
     public String getGreeting() {
         return "Hello world, lolz.";
     }
 
-    public static void main(String[] args) {
+    public static void main(String ... argv) {
         // TODO: Make a proper command line parser
-        // * Parser needs to take image, draw-boolean, and camera id.
+
+        App main = new App();
+        JCommander.newBuilder()
+            .addObject(main)
+            .build()
+            .parse(argv);
+
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         System.out.println(new App().getGreeting());
         NetworkTableInstance ntinst = NetworkTableInstance.getDefault();
+        // ntinst.startClientTeam(1569);
         ntinst.startClient("localhost");
         NetworkTable nt = ntinst.getTable("haywire-camera");//.getSubTable("haywire-camera");
-        VideoCapture camera = new VideoCapture(1);
+        VideoCapture camera = new VideoCapture(0);
         Mat frame = new Mat();
-        if (args.length != 0) {
+        if (imageUri != "") {
             cameraActive = false;
-            frame = Imgcodecs.imread(args[0]);
+            frame = Imgcodecs.imread(imageUri);
         }
         Imshow im = new Imshow("Video Preview");
         Detector detector = new Detector(true);

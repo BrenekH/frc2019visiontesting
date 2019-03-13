@@ -34,7 +34,8 @@ dependencies {
 
     // Repositories compile
     compile 'com.github.kylecorry31:Robot-Vision-API:v1.1.2'
-    compile "edu.wpi.first.ntcore:ntcore-java:2019.4.1" //.java
+    compile 'com.beust:jcommander:1.72'
+    // compile "edu.wpi.first.ntcore:ntcore-java:2019.4.1" //.java
     // http://first.wpi.edu/FRC/roborio/maven/release/ edu/wpi/first/ntcore/ntcore-jni/4.0.0/ntcore-jni-4.0.0-all.jar
     // compile "edu.wpi.first.ntcore.ntcore-jni:ntcore-jni"
 
@@ -42,6 +43,7 @@ dependencies {
     compile name: 'opencv-345'
     compile name: 'ntcore-jni-4.0.0-all'
     compile name: 'wpiutil-java-3.0.0'
+    compile name: 'ntcore-java-4.0.0'
     // compile name: "ntcore"
     // compile name: "wpiHal"
     // compile name: "wpilibj"
