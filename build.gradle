@@ -14,6 +14,7 @@ plugins {
     id 'application'
 
     id 'com.github.johnrengelman.shadow' version '5.0.0'
+    id 'org.hidetake.ssh' version '2.9.0'
 }
 
 repositories {
@@ -54,6 +55,18 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
+ssh.settings {
+    knownHosts = allowAnyHosts
+}
+
+remotes {
+  devPi {
+    host = '10.15.69.61'
+    user = 'pi'
+    password = 'raspberry'
+  }
+}
+
 // Define the main class for the application
 mainClassName = 'visiontesting.App'
 
@@ -66,4 +79,14 @@ jar {
 
 shadowJar {
     baseName = 'frc-vision-testing'
+}
+
+task deployToPi {
+    doLast {
+        ssh.run {
+            session(remotes.devPi) {
+                put from: "$project.rootDir/build/libs/frc-vision-testing-all.jar", into: '/home/pi/Vision/frc-vision-testing-all.jar'
+            }
+        }
+    }
 }

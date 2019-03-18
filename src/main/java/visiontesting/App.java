@@ -15,6 +15,18 @@ public class App {
     @Parameter(names={"--image", "-i"}, description="The path to an image to process. Leave blank to use camera.")
     static String imageUri = "";
 
+    @Parameter(names={"--stream", "-s"}, description="An http webcam stream to grab images from. The image flag overrides this.")
+    static String webcamStreamUrl = "";
+
+    @Parameter(names={"--draw", "-d"}, description="A boolean dictating whether or not to draw the cargo bays.")
+    static boolean drawBool = false;
+
+    @Parameter(names={"--camera", "-c"}, description="An int dictating the camera number. Defaults to 0")
+    static int cameraId = 0;
+
+    @Parameter(names={"--local", "-l"}, description="A bool dictating whether to use local NetworkTables or NetworkTables off the RoboRio")
+    static boolean localBool = false;
+
     public static boolean cameraActive = true;
 
     public String getGreeting() {
@@ -33,23 +45,33 @@ public class App {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         System.out.println(new App().getGreeting());
         NetworkTableInstance ntinst = NetworkTableInstance.getDefault();
-        // ntinst.startClientTeam(1569);
-        ntinst.startClient("localhost");
+        if (localBool) {
+            ntinst.startClient("localhost");
+        }
+        else {
+            ntinst.startClientTeam(1569);
+        }
         NetworkTable nt = ntinst.getTable("haywire-camera");//.getSubTable("haywire-camera");
-        VideoCapture camera = new VideoCapture(0);
+        VideoCapture camera = new VideoCapture(cameraId);
+        if (webcamStreamUrl != "") {
+            camera = new VideoCapture(webcamStreamUrl);
+            System.out.println("Set camera to stream");
+        }
         Mat frame = new Mat();
         if (imageUri != "") {
             cameraActive = false;
             frame = Imgcodecs.imread(imageUri);
         }
         Imshow im = new Imshow("Video Preview");
-        Detector detector = new Detector(true);
+        Detector detector = new Detector(drawBool);
         im.Window.setResizable(true);
         while (true) {
             if (cameraActive) {
                 camera.read(frame);
+                System.out.println("Read frame");
             }
-            System.out.println(detector.detect2019Targets(frame).size());
+            // System.out.println(detector.detect2019Targets(frame).size());
+            detector.detect2019Targets(frame);
             im.showImage(frame);
         }
     }
