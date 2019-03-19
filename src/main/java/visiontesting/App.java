@@ -42,7 +42,18 @@ public class App {
             .build()
             .parse(argv);
 
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        // System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        if (System.getProperty("os.name").toLowerCase().contains("win")) {
+            String opencvpath = System.getProperty("user.dir") + "\\";
+            String libPath = System.getProperty("java.library.path");
+            System.load(opencvpath + Core.NATIVE_LIBRARY_NAME + ".dll");
+        } else {
+            String opencvpath = System.getProperty("user.dir") + "/";
+            String libPath = System.getProperty("java.library.path");
+            System.out.println(libPath);
+            System.load(opencvpath + Core.NATIVE_LIBRARY_NAME + ".so");
+        }
+        System.out.println(Core.NATIVE_LIBRARY_NAME.toString());
         System.out.println(new App().getGreeting());
         NetworkTableInstance ntinst = NetworkTableInstance.getDefault();
         if (localBool) {
