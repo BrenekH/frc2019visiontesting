@@ -42,9 +42,9 @@ dependencies {
 
     // Libs compile
     compile name: 'opencv-345'
-    compile name: 'ntcore-jni-4.0.0-all'
-    compile name: 'wpiutil-java-3.0.0'
-    compile name: 'ntcore-java-4.0.0'
+    // compile name: 'ntcore-jni-4.0.0-all'
+    // compile name: 'wpiutil-java-3.0.0'
+    // compile name: 'ntcore-java-4.0.0'
     // compile name: "ntcore"
     // compile name: "wpiHal"
     // compile name: "wpilibj"

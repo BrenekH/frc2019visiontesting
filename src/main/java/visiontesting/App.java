@@ -55,14 +55,14 @@ public class App {
         }
         System.out.println(Core.NATIVE_LIBRARY_NAME.toString());
         System.out.println(new App().getGreeting());
-        NetworkTableInstance ntinst = NetworkTableInstance.getDefault();
-        if (localBool) {
-            ntinst.startClient("localhost");
-        }
-        else {
-            ntinst.startClientTeam(1569);
-        }
-        NetworkTable nt = ntinst.getTable("haywire-camera");//.getSubTable("haywire-camera");
+        // NetworkTableInstance ntinst = NetworkTableInstance.getDefault();
+        // if (localBool) {
+        //     ntinst.startClient("localhost");
+        // }
+        // else {
+        //     ntinst.startClientTeam(1569);
+        // }
+        // NetworkTable nt = ntinst.getTable("haywire-camera");//.getSubTable("haywire-camera");
         VideoCapture camera = new VideoCapture(cameraId);
         if (webcamStreamUrl != "") {
             camera = new VideoCapture(webcamStreamUrl);
