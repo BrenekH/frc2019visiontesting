@@ -7,7 +7,7 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.imgcodecs.Imgcodecs;
-import edu.wpi.first.networktables.*;
+// import edu.wpi.first.networktables.*;
 import com.beust.jcommander.*;
 
 public class App {
